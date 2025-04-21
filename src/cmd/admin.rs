@@ -15,3 +15,12 @@ pub enum AdminCommands {
     },
     Teardown,
 }
+
+pub fn run(args: &AdminArgs) {
+    match args.command {
+        AdminCommands::Setup { replicas } => {
+            println!("TODO Admin Setup with {} replicas", replicas)
+        }
+        AdminCommands::Teardown => println!("TODO Admin Teardown"),
+    }
+}

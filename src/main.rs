@@ -1,9 +1,7 @@
 mod cmd;
 
+use cmd::cli::Commands;
 use cmd::prelude::*;
-use cmd::{admin::AdminCommands, cli::Commands};
-
-const DEFAULT_PORT: u16 = 8100;
 
 /*
 TODO:
@@ -19,18 +17,8 @@ fn main() {
     println!("debug level = {}", cli.debug);
 
     match &cli.command {
-        Commands::Admin(admin_args) => match &admin_args.command {
-            AdminCommands::Setup { replicas } => {
-                println!("Admin Setup with {} replicas", replicas)
-            }
-            AdminCommands::Teardown => println!("Admin Teardown"),
-        },
-        Commands::Client { server, port } => {
-            let port = port.unwrap_or(DEFAULT_PORT);
-            println!("TODO Client should connect to {server} on port {port}")
-        }
-        Commands::Server { port } => {
-            println!("TODO Server should listen on port {port}")
-        }
+        Commands::Admin(admin_args) => cmd::admin::run(admin_args),
+        Commands::Client(client_args) => cmd::client::run(client_args),
+        Commands::Server(server_args) => cmd::server::run(server_args),
     }
 }

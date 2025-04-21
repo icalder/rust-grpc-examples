@@ -29,17 +29,7 @@ pub enum Commands {
     /// admin subcommands
     Admin(super::admin::AdminArgs),
     /// run a client
-    Client {
-        // This is a positional arg
-        server: String,
-
-        // N.B. cargo add clap with env feature: cargo add clap --features derive,env
-        #[arg(short, long, env = "CLIENT_PORT")]
-        port: Option<u16>,
-    },
+    Client(super::client::ClientArgs),
     /// run a server
-    Server {
-        #[arg(short, long, default_value_t = 8100)]
-        port: u16,
-    },
+    Server(super::server::ServerArgs),
 }
